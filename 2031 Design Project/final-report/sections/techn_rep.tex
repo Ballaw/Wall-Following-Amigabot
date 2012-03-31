@@ -1,0 +1,78 @@
+\section{Technical Results}
+
+\subsection{Final Demonstration Results}
+
+The course used for the final demonstration consisted of five straight
+wall segments, with four outside turns and four inside turns. Each
+straight segment of the course was approximately four feet. 
+
+The results of the final demonstration showing the \textbf{expected},
+\textbf{actual}, and \textbf{difference}  in values of scores can be found in
+Table~\ref{results}. The expected values for the completion, accuracy,
+and time are based on test runs performed during lab periods. 
+
+\begin{table}[h!]
+  \centering \cprotect \fbox{
+    \begin{minipage}{5.5in}
+      \centering
+      \small
+     \cprotect \caption{Results of wall following demo}
+      \label{results}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        &\multicolumn{3}{|c|}{\textbf{Completeness} (\%)}&
+        \multicolumn{3}{|c|}{\textbf{Accuracy} (\%)}&
+        \multicolumn{3}{|c|}{\textbf{Time} (min:sec)} \\ \hline
+        &\textbf{Exp.}&\textbf{Act.}&\textbf{Diff.}&
+        \textbf{Exp.}&\textbf{Act.}&\textbf{Diff.}&
+        \textbf{Exp.}&\textbf{Act.}&\textbf{Diff.}  \\
+        \hline
+        \textbf{Right Wall} & 100\% & 100\% & - & 100\% & 100\% & - &
+        1:15 & 1:23 & 0:08 \\ \hline
+        \textbf{Left Wall} & 100\% & 100\% & - & 100\% & 0\% & 100\% &
+        1:15 & 5:52 & 4:37 \\ \hline
+        \multicolumn{7}{|l|}{\textbf{Total Time}} & 2:30 & 6:15 & 3:45 \\ \hline
+      \end{tabular}
+    \end{minipage}
+  }
+\end{table} 
+
+The robot did not collide with the wall on either run. It received an
+accuracy bonus for five out of the ten sections it completed. 
+
+The robot completed the course following the right wall in one minute
+and 23 seconds, which was eight seconds slower than the expected
+time. The robot was 100\% accurate during this run.
+
+The team experienced problems during the left wall following
+demonstration. The problems encountered were due to the prevalence of
+sequential inside turns in the particular left-wall following course
+presented. One issue identified was that the robot was inconsistent in
+detecting its distance to a forward wall, which is crucial to execute
+an inside turn. The result was that the robot would frequently turn
+too early or too late and would be unable to readjust to recover in
+time for the next turn. The
+problem was in the range-calculating algorithm implemented and not in the
+hard-coded \(90^\circ\) turns using rotary encoder measurements, since
+the turns executed were exceptionally consistent. The time to complete the
+course was a result of several trial runs due to near collisions. The
+robot was switched for another robot at the behest of the professor
+due to strange sensor behavior on the left side. This event caused
+additional setup and upload delays. The robot was able to succesfully
+complete the course, but did so without maintaining a constant
+distance to the wall.
+
+\subsection{Outcomes}
+
+The results from the final demonstration and test runs suggest that
+the robot can consistently and accurately complete a wall following
+course predominantly composed of outside turns. When performing
+sequential inside turns, the robot is often unable to successfully
+navigate the course. In either case, the robot must travel very slowly
+to avoid collisions with the wall. 
+
+
+
+
+
+

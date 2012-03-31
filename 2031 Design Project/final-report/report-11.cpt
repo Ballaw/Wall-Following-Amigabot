@@ -1,0 +1,9 @@
+
+    \begin{minipage}{4.5in}
+    \centering
+    \includegraphics[width =
+    \textwidth]{./graphics/inside_turn.png}
+    \cprotect \caption{Geometry of an inside turn.}
+      \label{it}
+    \end{minipage}
+  ^^E^^L 

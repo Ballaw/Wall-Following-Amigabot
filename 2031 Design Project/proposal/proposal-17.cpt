@@ -1,0 +1,8 @@
+
+\begin{minipage}{3.5in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/turning.png}
+\cprotect \caption{Path lengths \(C_1\) and \(C_2\) as the robot turns.}
+\label{turning}
+\end{minipage}
+^^E^^L 

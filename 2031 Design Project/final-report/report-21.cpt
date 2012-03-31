@@ -1,0 +1,8 @@
+
+    \begin{minipage}{4.5in}
+      \centering
+      \includegraphics[width = \textwidth]{graphics/assignments.jpg}
+      \cprotect \caption{Function assignments for DE2 peripherals.}
+      \label{assign}
+    \end{minipage}
+  ^^E^^L 

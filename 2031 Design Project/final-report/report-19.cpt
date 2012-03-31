@@ -1,0 +1,9 @@
+
+    \begin{minipage}{4.5in}
+      \centering
+      \includegraphics[width = \textwidth]{graphics/ledf.jpg}
+      \cprotect \caption{The red and green LED arrays on the DE2
+        board.}
+      \label{ledf}
+    \end{minipage}
+  ^^E^^L 

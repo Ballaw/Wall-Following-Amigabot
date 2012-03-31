@@ -1,0 +1,14 @@
+4.1 Final Demonstration Results
+
+The course used for the final demonstration consisted of five straight wall segments, with four outside turns and four inside turns. Each straight segment of the course was approximately three feet. 
+
+The results of the final demonstration can be found in figure 10. 
+
+The robot did not collide with the wall on either run. It received an accuracy bonus for five out of the ten sections it completed. 
+
+The robot completed the course following the right wall in one minute and 23 seconds, which was eight seconds above the expected time. The robot was 100% accurate during this run. 
+
+The team experienced problems during the left wall following demonstration. The time to complete the course was a result of several trial runs due to near collisions. Additionally, the team had to switch out the robot due to strange behavior that may have been the result of faulty sensors. This event caused additional setup and recompilation delays. The robot was able to succesfully complete the course, but it did so without maintaining a constant distance to the wall. 
+
+*** figure 10. Expected and actual results of program demonstration. ***
+

@@ -1,0 +1,10 @@
+
+    \begin{minipage}{3.5in}
+      \centering
+      \includegraphics[width =
+      \textwidth]{./graphics/s0s1.jpg}
+      \cprotect \caption{Sensors \(s_4\) and \(s_5\) (or \(s_0\) and
+        \(s_1\)) measuring distance to wall.}
+      \label{s0s1}
+    \end{minipage}
+  ^^E^^L 

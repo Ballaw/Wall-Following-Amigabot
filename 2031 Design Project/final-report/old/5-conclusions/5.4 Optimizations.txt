@@ -1,0 +1,5 @@
+5.4 Optimizations 
+
+To optimize the design, the wait loops must be removed. (Why??)
+
+Additionally, the invalid value of sensors should be changed from a negative number (what the number is), to a large positive number (0x7FFF). (why?) 

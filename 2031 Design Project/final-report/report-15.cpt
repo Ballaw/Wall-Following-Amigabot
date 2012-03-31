@@ -1,0 +1,9 @@
+
+    \begin{minipage}{4.5in}
+      \centering
+      \includegraphics[width = \textwidth]{graphics/7seg.jpg}
+      \cprotect \caption{Implementation of both seven-segment
+        displays.}
+      \label{7seg}
+    \end{minipage}
+  ^^E^^L 

@@ -1,0 +1,468 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 1024;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..3FF] : 0000;  -- Default to NOP
+
+           000 : 0597;  -- Start:	LOAD	RDY_ST
+           001 : 4C06;  -- 	OUT	LCD
+           002 : 05B0;  -- 	LOAD	NTY
+           003 : 7D90;  -- 	DIV	SEVEN
+           004 : 09C2;  -- 	STORE	HA
+           005 : 4803;  -- 	IN	XIO
+           006 : 25A2;  --         AND     Key3Mask  		; Is the user pressing key 3?
+           007 : 1C00;  --         JPOS   	Start      		; If not, wait
+           008 : 4800;  -- 	IN	SWITCHES		; Get speeds and right follow or left
+           009 : 25A4;  -- 	AND	Spdmask
+           00A : 09B5;  -- 	STORE	SSPD
+           00B : 3013;  -- 	SHIFT	&B10011
+           00C : 09BF;  -- 	STORE 	k1
+           00D : 09C0;  -- 	STORE	k2
+           00E : 4800;  -- 	IN	SWITCHES
+           00F : 25A5;  -- 	AND	Sw15Mask		; Change for automatic wall switching on
+           010 : 1C97;  -- 	JPOS	lSTRT
+           011 : 1412;  -- 	JUMP	rSTRT
+           012 : 05A8;  -- rSTRT:	LOAD	EnSonar2 		; Enable sonars
+           013 : 29A9;  -- 	OR      EnSonar3
+           014 : 29AA;  -- 	OR	EnSonar4
+           015 : 29AB;  -- 	OR	EnSonar5
+           016 : 4CB2;  -- 	OUT	SONAREN
+           017 : 0598;  -- rSafe:	LOAD	KEY2_ST
+           018 : 4C06;  -- 	OUT	LCD	
+           019 : 48AA;  -- 	IN	DIST2			; Start and display dists
+           01A : 4140;  -- 	CALL	NORMD
+           01B : 4C04;  -- 	OUT	SEVENSEG
+           01C : 414C;  -- 	CALL	rMinR1
+           01D : 4C05;  -- 	OUT	SEVENSEG2
+           01E : 4803;  -- 	IN	XIO
+           01F : 25A3;  -- 	AND	Key2Mask
+           020 : 1C17;  -- 	JPOS	rSafe
+           021 : 0599;  -- 	LOAD	RGHT_ST
+           022 : 4C06;  -- 	OUT	LCD
+           023 : 05B5;  -- rFORW:	LOAD	SSPD			; Once key3 is pressed again, begin wall following
+           024 : 4C8B;  -- 	OUT	RVELCMD
+           025 : 4C83;  -- 	OUT	LVELCMD
+           026 : 09C5;  -- 	STORE	LW
+           027 : 09C6;  -- 	STORE	RW
+           028 : 4174;  -- 	CALL	DSPSPD
+           029 : 4155;  -- 	CALL	rMinR2
+           02A : 11BB;  -- 	SUB	IT_THR
+           02B : 1834;  -- 	JNEG	rIT
+           02C : 414C;  -- 	CALL	rMinR1			;take min of s4 and s5		
+           02D : 11B8;  -- 	SUB	t18				; if DIST5 is less than 18cm adjust out
+           02E : 1858;  -- 	JNEG	rAdjO
+           02F : 48AD;  -- 	IN	DIST5
+           030 : 4140;  -- 	CALL	NORMD
+           031 : 11B9;  -- 	SUB	t22		
+           032 : 1C78;  -- 	JPOS	rAdjI			; if DIST5 is greater than 22cm adjust in
+           033 : 1423;  -- 	JUMP	rForw			; if didn't change states go back to forward state
+           034 : 411D;  -- rIT:	CALL	INITP
+           035 : 05B1;  -- rITlp:	LOAD	IT_OS			;Set the wheel speeds
+           036 : 4C83;  -- 	OUT	LVELCMD
+           037 : 09C5;  -- 	STORE	LW
+           038 : 05B2;  -- 	LOAD	IT_IS
+           039 : 4C8B;  -- 	OUT	RVELCMD
+           03A : 09C6;  -- 	STORE	RW
+           03B : 4174;  -- 	CALL	DSPSPD
+           03C : 4880;  -- 	IN	LPOSLOW			;Get the new positions
+           03D : 3018;  -- 	SHIFT	&B11000			;and shift (recall if fifth
+           03E : 09AC;  -- 	STORE	LP				;bit is 0 then left shift, v-v)
+           03F : 4881;  -- 	IN	LPOSHIGH
+           040 : 3008;  -- 	SHIFT	&B01000
+           041 : 29AC;  -- 	OR	LP
+           042 : 09AC;  -- 	STORE	LP		
+           043 : 4888;  -- 	IN	RPOSLOW			;Right wheel
+           044 : 3018;  -- 	SHIFT	&B11000
+           045 : 09AD;  -- 	STORE	RP
+           046 : 4889;  -- 	IN	RPOSHIGH
+           047 : 3008;  -- 	SHIFT	&B01000
+           048 : 29AD;  -- 	OR	RP		
+           049 : 11AF;  -- 	SUB	RP_0			;See if have travelled enough to
+           04A : 0DAC;  -- 	ADD	LP				;stop turning. Recall that RP is
+           04B : 11AE;  -- 	SUB	LP_0			;actually neg. if right wheel has
+           04C : 0DB0;  -- 	ADD	NTY				;moved forward.
+           04D : 09AC;  -- 	STORE	LP 		;not lp, just using register temporarily
+           04E : 7DC2;  -- 	DIV	HA
+           04F : 09C3;  -- 	STORE	SHIFT_LDB
+           050 : 05C4;  -- 	LOAD	LED_BG
+           051 : 79C3;  -- 	SHIFT2	SHIFT_LDB
+           052 : 4C08;  -- 	OUT	GLED
+           053 : 05AC;  -- 	LOAD	LP
+           054 : 1C35;  -- 	JPOS	rITlp
+           055 : 059F;  -- 	LOAD	ZERO
+           056 : 4C08;  -- 	OUT	GLED
+           057 : 1423;  -- 	JUMP	rFORW
+           058 : 05B5;  -- rAdjO:	LOAD	SSPD
+           059 : 3008;  -- 	SHIFT	&B01000			; Left shift by 8 (multiply by 256)
+           05A : 09B6;  -- 	STORE	IW				; Inside wheel angular velocity
+           05B : 09B7;  -- 	STORE	OW				; Outside
+           05C : 414C;  -- rAOlp:	CALL	rMinR1
+           05D : 4146;  -- 	CALL	CAP
+           05E : 11BA;  -- 	SUB	t20
+           05F : 6DBF;  -- 	MULT	k1
+           060 : 7000;  -- 	MLO
+           061 : 0DB7;  -- 	ADD	OW
+           062 : 09B7;  -- 	STORE	OW
+           063 : 3018;  -- 	SHIFT	&B11000		; Right shift by 8 (divide by 256), return back to motor range
+           064 : 4C83;  -- 	OUT	LVELCMD
+           065 : 09C5;  -- 	STORE	LW
+           066 : 414C;  -- 	CALL	rMinR1
+           067 : 4146;  -- 	CALL	CAP
+           068 : 11BA;  -- 	SUB	t20
+           069 : 6DC0;  -- 	MULT	k2
+           06A : 7000;  -- 	MLO
+           06B : 412C;  -- 	CALL	INVERT
+           06C : 0DB6;  -- 	ADD	IW
+           06D : 09B6;  -- 	STORE	IW
+           06E : 3018;  -- 	SHIFT	&B11000			; Right shift by 8 (divide by 256)
+           06F : 4C8B;  -- 	OUT	RVELCMD
+           070 : 09C6;  -- 	STORE	RW
+           071 : 4174;  -- 	CALL	DSPSPD
+           072 : 4130;  -- 	CALL	WAITR
+           073 : 48AD;  -- 	IN	DIST5			;Check if return to forward state
+           074 : 4140;  -- 	CALL	NORMD
+           075 : 11B8;  -- 	SUB	t18
+           076 : 185C;  -- 	JNEG	rAOlp
+           077 : 1423;  -- 	JUMP	rForw
+           078 : 05B5;  -- rAdjI:	LOAD	SSPD
+           079 : 3008;  -- 	SHIFT	&B01000			; Left shift by 8 (multiply by 256)
+           07A : 09B6;  -- 	STORE	IW				; Inside wheel angular velocity
+           07B : 09B7;  -- 	STORE	OW				; Outside
+           07C : 414C;  -- rAIlp:	CALL	rMinR1
+           07D : 4146;  -- 	CALL	CAP
+           07E : 11BA;  -- 	SUB	t20
+           07F : 6DBF;  -- 	MULT	k1
+           080 : 7000;  -- 	MLO
+           081 : 0DB7;  -- 	ADD	OW
+           082 : 09B7;  -- 	STORE	OW
+           083 : 3018;  -- 	SHIFT	&B11000		; Right shift by 8 (divide by 256), return back to motor range
+           084 : 4C83;  -- 	OUT	LVELCMD
+           085 : 09C5;  -- 	STORE	LW
+           086 : 414C;  -- 	CALL	rMinR1
+           087 : 4146;  -- 	CALL	CAP
+           088 : 11BA;  -- 	SUB	t20
+           089 : 6DC0;  -- 	MULT	k2
+           08A : 7000;  -- 	MLO
+           08B : 412C;  -- 	CALL	INVERT
+           08C : 0DB6;  -- 	ADD	IW
+           08D : 09B6;  -- 	STORE	IW
+           08E : 3018;  -- 	SHIFT	&B11000			; Right shift by 8 (divide by 256)
+           08F : 4C8B;  -- 	OUT	RVELCMD
+           090 : 09C6;  -- 	STORE	RW
+           091 : 4174;  -- 	CALL	DSPSPD
+           092 : 4130;  -- 	CALL	WAITR
+           093 : 414C;  -- 	CALL	rMinR1
+           094 : 11B9;  -- 	SUB	t22
+           095 : 1C7C;  -- 	JPOS	rAIlp
+           096 : 1423;  -- 	JUMP	rForw
+           097 : 05A6;  -- lSTRT:	LOAD	EnSonar0 		; Enable sonars
+           098 : 29A7;  -- 	OR	EnSonar1
+           099 : 29A8;  -- 	OR	EnSonar2
+           09A : 29A9;  -- 	OR	EnSonar3
+           09B : 4CB2;  -- 	OUT	SONAREN
+           09C : 0598;  -- lSafe:	LOAD	KEY2_ST
+           09D : 4C06;  -- 	OUT	LCD
+           09E : 48AB;  -- 	IN	DIST3			; Start and display dists
+           09F : 4140;  -- 	CALL	NORMD
+           0A0 : 4C04;  -- 	OUT	SEVENSEG
+           0A1 : 4160;  -- 	CALL	lMinR1
+           0A2 : 4C05;  -- 	OUT	SEVENSEG2
+           0A3 : 4803;  -- 	IN	XIO
+           0A4 : 25A3;  -- 	AND	Key2Mask
+           0A5 : 1C9C;  -- 	JPOS	lSafe
+           0A6 : 059A;  -- 	LOAD	LEFT_ST
+           0A7 : 4C06;  -- 	OUT	LCD
+           0A8 : 05B5;  -- lFORW:	LOAD	SSPD			; Once key3 is pressed again, begin wall following
+           0A9 : 4C8B;  -- 	OUT	RVELCMD
+           0AA : 4C83;  -- 	OUT	LVELCMD
+           0AB : 09C5;  -- 	STORE	LW
+           0AC : 09C6;  -- 	STORE	RW
+           0AD : 4174;  -- 	CALL	DSPSPD
+           0AE : 4169;  -- 	CALL	lMinR2
+           0AF : 11BB;  -- 	SUB	IT_THR
+           0B0 : 18B9;  -- 	JNEG	lIT
+           0B1 : 4160;  -- 	CALL	lMinR1			;take min of s0 and s1		
+           0B2 : 11B8;  -- 	SUB	t18				; if DIST5 is less than 18cm adjust out
+           0B3 : 18DE;  -- 	JNEG	lAdjO
+           0B4 : 48A8;  -- 	IN	DIST0
+           0B5 : 4140;  -- 	CALL	NORMD
+           0B6 : 11B9;  -- 	SUB	t22		
+           0B7 : 1CFE;  -- 	JPOS	lAdjI			; if DIST5 is greater than 22cm adjust in
+           0B8 : 14A8;  -- 	JUMP	lForw			; if didn't change states go back to forward state
+           0B9 : 411D;  -- lIT:	CALL	INITP
+           0BA : 05B1;  -- lITlp:	LOAD	IT_OS			;Set the wheel speeds
+           0BB : 4C8B;  -- 	OUT	RVELCMD
+           0BC : 09C6;  -- 	STORE	RW
+           0BD : 05B2;  -- 	LOAD	IT_IS
+           0BE : 4C83;  -- 	OUT	LVELCMD
+           0BF : 09C5;  -- 	STORE	LW
+           0C0 : 4174;  -- 	CALL	DSPSPD
+           0C1 : 4880;  -- 	IN	LPOSLOW			;Get the new positions
+           0C2 : 3018;  -- 	SHIFT	&B11000			;and shift (recall if fifth
+           0C3 : 09AC;  -- 	STORE	LP				;bit is 0 then left shift, v-v)
+           0C4 : 4881;  -- 	IN	LPOSHIGH
+           0C5 : 3008;  -- 	SHIFT	&B01000
+           0C6 : 29AC;  -- 	OR	LP
+           0C7 : 09AC;  -- 	STORE	LP		
+           0C8 : 4888;  -- 	IN	RPOSLOW			;Right wheel
+           0C9 : 3018;  -- 	SHIFT	&B11000
+           0CA : 09AD;  -- 	STORE	RP
+           0CB : 4889;  -- 	IN	RPOSHIGH
+           0CC : 3008;  -- 	SHIFT	&B01000
+           0CD : 29AD;  -- 	OR	RP		
+           0CE : 11AF;  -- 	SUB	RP_0			;See if have travelled enough to
+           0CF : 0DAC;  -- 	ADD	LP				;stop turning. Recall that RP is
+           0D0 : 11AE;  -- 	SUB	LP_0			;actually neg. if right wheel has
+           0D1 : 11B0;  -- 	SUB	NTY				;moved forward.
+           0D2 : 09AC;  -- 	STORE	LP 		;not lp, just using register temporarily
+           0D3 : 412C;  -- 	CALL	INVERT
+           0D4 : 7DC2;  -- 	DIV	HA
+           0D5 : 09C3;  -- 	STORE	SHIFT_LDB
+           0D6 : 05C4;  -- 	LOAD	LED_BG
+           0D7 : 79C3;  -- 	SHIFT2	SHIFT_LDB
+           0D8 : 4C08;  -- 	OUT	GLED
+           0D9 : 05AC;  -- 	LOAD	LP
+           0DA : 18BA;  -- 	JNEG	lITlp
+           0DB : 059F;  -- 	LOAD	ZERO
+           0DC : 4C08;  -- 	OUT	GLED
+           0DD : 14A8;  -- 	JUMP	lFORW
+           0DE : 05B5;  -- lAdjO:	LOAD	SSPD
+           0DF : 3008;  -- 	SHIFT	&B01000			; Left shift by 8 (multiply by 256)
+           0E0 : 09B6;  -- 	STORE	IW				; Inside wheel angular velocity
+           0E1 : 09B7;  -- 	STORE	OW				; Outside
+           0E2 : 4160;  -- lAOlp:	CALL	lMinR1
+           0E3 : 4146;  -- 	CALL	CAP
+           0E4 : 11BA;  -- 	SUB	t20
+           0E5 : 6DBF;  -- 	MULT	k1
+           0E6 : 7000;  -- 	MLO
+           0E7 : 0DB7;  -- 	ADD	OW
+           0E8 : 09B7;  -- 	STORE	OW
+           0E9 : 3018;  -- 	SHIFT	&B11000		; Right shift by 8 (divide by 256), return back to motor range
+           0EA : 4C8B;  -- 	OUT	RVELCMD
+           0EB : 09C6;  -- 	STORE	RW
+           0EC : 4160;  -- 	CALL	lMinR1
+           0ED : 4146;  -- 	CALL	CAP
+           0EE : 11BA;  -- 	SUB	t20
+           0EF : 6DC0;  -- 	MULT	k2
+           0F0 : 7000;  -- 	MLO
+           0F1 : 412C;  -- 	CALL	INVERT
+           0F2 : 0DB6;  -- 	ADD	IW
+           0F3 : 09B6;  -- 	STORE	IW
+           0F4 : 3018;  -- 	SHIFT	&B11000			; Right shift by 8 (divide by 256)
+           0F5 : 4C83;  -- 	OUT	LVELCMD
+           0F6 : 09C5;  -- 	STORE	LW
+           0F7 : 4174;  -- 	CALL	DSPSPD
+           0F8 : 4138;  -- 	CALL	WAITL
+           0F9 : 48A8;  -- 	IN	DIST0			;Check if return to forward state
+           0FA : 4140;  -- 	CALL	NORMD
+           0FB : 11B8;  -- 	SUB	t18
+           0FC : 18E2;  -- 	JNEG	lAOlp
+           0FD : 14A8;  -- 	JUMP	lForw
+           0FE : 05B5;  -- lAdjI:	LOAD	SSPD
+           0FF : 3008;  -- 	SHIFT	&B01000			; Left shift by 8 (multiply by 256)
+           100 : 09B6;  -- 	STORE	IW				; Inside wheel angular velocity
+           101 : 09B7;  -- 	STORE	OW				; Outside
+           102 : 4160;  -- lAIlp:	CALL	lMinR1
+           103 : 4146;  -- 	CALL	CAP
+           104 : 11BA;  -- 	SUB	t20
+           105 : 6DBF;  -- 	MULT	k1
+           106 : 7000;  -- 	MLO
+           107 : 0DB7;  -- 	ADD	OW
+           108 : 09B7;  -- 	STORE	OW
+           109 : 3018;  -- 	SHIFT	&B11000		; Right shift by 8 (divide by 256), return back to motor range
+           10A : 4C8B;  -- 	OUT	RVELCMD
+           10B : 09C6;  -- 	STORE	RW
+           10C : 4160;  -- 	CALL	lMinR1
+           10D : 4146;  -- 	CALL	CAP
+           10E : 11BA;  -- 	SUB	t20
+           10F : 6DC0;  -- 	MULT	k2
+           110 : 7000;  -- 	MLO
+           111 : 412C;  -- 	CALL	INVERT
+           112 : 0DB6;  -- 	ADD	IW
+           113 : 09B6;  -- 	STORE	IW
+           114 : 3018;  -- 	SHIFT	&B11000			; Right shift by 8 (divide by 256)
+           115 : 4C83;  -- 	OUT	LVELCMD
+           116 : 09C5;  -- 	STORE	LW
+           117 : 4174;  -- 	CALL	DSPSPD
+           118 : 4138;  -- 	CALL	WAITL
+           119 : 4160;  -- 	CALL	lMinR1
+           11A : 11B9;  -- 	SUB	t22
+           11B : 1D02;  -- 	JPOS	lAIlp
+           11C : 14A8;  -- 	JUMP	lForw
+           11D : 4880;  -- INITP:	IN	LPOSLOW			;Get the initial positions
+           11E : 3018;  -- 	SHIFT	&B11000			;and shift them to desired range
+           11F : 09AE;  -- 	STORE	LP_0
+           120 : 4881;  -- 	IN	LPOSHIGH
+           121 : 3008;  -- 	SHIFT	&B01000
+           122 : 29AE;  -- 	OR	LP_0
+           123 : 09AE;  -- 	STORE	LP_0
+           124 : 4888;  -- 	IN	RPOSLOW			;Right wheel
+           125 : 3018;  -- 	SHIFT	&B11000
+           126 : 09AF;  -- 	STORE	RP_0
+           127 : 4889;  -- 	IN	RPOSHIGH
+           128 : 3008;  -- 	SHIFT	&B01000
+           129 : 29AF;  -- 	OR	RP_0
+           12A : 09AF;  -- 	STORE	RP_0
+           12B : 4400;  -- 	RETURN
+           12C : 099D;  -- INVERT:	STORE	INVR
+           12D : 059F;  -- 	LOAD	ZERO
+           12E : 119D;  -- 	SUB	INVR
+           12F : 4400;  -- 	RETURN
+           130 : 4C02;  -- WAITR:	OUT	TIMER
+           131 : 4155;  -- 	CALL	rMinR2
+           132 : 11BB;  -- 	SUB	IT_THR
+           133 : 1834;  -- 	JNEG	rIT
+           134 : 4802;  -- 	IN      TIMER
+           135 : 119C;  --         SUB     TIME
+           136 : 1931;  --         JNEG    WRLOOP
+           137 : 4400;  --         RETURN
+           138 : 4C02;  -- WAITL:	OUT	TIMER
+           139 : 4169;  -- 	CALL	lMinR2
+           13A : 11BB;  -- 	SUB	IT_THR
+           13B : 18B9;  -- 	JNEG	lIT
+           13C : 4802;  -- 	IN      TIMER
+           13D : 119C;  --         SUB     TIME
+           13E : 1939;  --         JNEG    WLLOOP
+           13F : 4400;  --         RETURN
+           140 : 11BD;  -- NORMD:	SUB	FFFF
+           141 : 2144;  -- 	JZERO	nm1
+           142 : 0DBD;  -- 	ADD	FFFF
+           143 : 4400;  -- 	RETURN
+           144 : 05BE;  -- nm1:	LOAD	H7FFF
+           145 : 4400;  -- 	RETURN
+           146 : 119B;  -- CAP:	SUB	DMAX
+           147 : 1D4A;  -- 	JPOS	CAP1
+           148 : 0D9B;  -- 	ADD	DMAX
+           149 : 4400;  -- 	RETURN		
+           14A : 059B;  -- CAP1:	LOAD	DMAX
+           14B : 4400;  -- 	RETURN
+           14C : 48AC;  -- rMinR1:	IN	DIST4
+           14D : 4140;  -- 	CALL	NORMD
+           14E : 09C1;  -- 	STORE	MRR
+           14F : 48AD;  -- 	IN	DIST5
+           150 : 4140;  -- 	CALL	NORMD
+           151 : 11C1;  -- 	SUB	MRR
+           152 : 1D5E;  -- 	JPOS	rS4				; if DIST4 < DIST5 JUMP
+           153 : 0DC1;  -- 	ADD	MRR				; if not, out DIST5
+           154 : 4400;  -- 	RETURN		
+           155 : 48AB;  -- rMinR2:	IN	DIST3
+           156 : 4140;  -- 	CALL	NORMD
+           157 : 09C1;  -- 	STORE	MRR
+           158 : 48AA;  -- 	IN	DIST2
+           159 : 4140;  -- 	CALL	NORMD
+           15A : 11C1;  -- 	SUB	MRR
+           15B : 1D5E;  -- 	JPOS	rS4				; if DIST3 < DIST2 JUMP
+           15C : 0DC1;  -- 	ADD	MRR				; if not, out DIST5
+           15D : 4400;  -- 	RETURN				
+           15E : 05C1;  -- rS4:	LOAD	MRR				; if DIST4 < DIST out DIST4
+           15F : 4400;  -- 	RETURN
+           160 : 48A9;  -- lMinR1:	IN	DIST1
+           161 : 4140;  -- 	CALL	NORMD
+           162 : 09C1;  -- 	STORE	MRR
+           163 : 48A8;  -- 	IN	DIST0
+           164 : 4140;  -- 	CALL	NORMD
+           165 : 11C1;  -- 	SUB	MRR
+           166 : 1D72;  -- 	JPOS	lS4				; if DIST1 < DIST0 JUMP
+           167 : 0DC1;  -- 	ADD	MRR				; if not, out DIST0
+           168 : 4400;  -- 	RETURN	
+           169 : 48AA;  -- lMinR2:	IN	DIST2
+           16A : 4140;  -- 	CALL	NORMD
+           16B : 09C1;  -- 	STORE	MRR
+           16C : 48AB;  -- 	IN	DIST3
+           16D : 4140;  -- 	CALL	NORMD
+           16E : 11C1;  -- 	SUB	MRR
+           16F : 1D72;  -- 	JPOS	lS4				; if DIST1 < DIST0 JUMP
+           170 : 0DC1;  -- 	ADD	MRR				; if not, out DIST0
+           171 : 4400;  -- 	RETURN					
+           172 : 05C1;  -- lS4:	LOAD	MRR				; if DIST1 < DIST out DIST1
+           173 : 4400;  -- 	RETURN
+           174 : 05C5;  -- DSPSPD: LOAD	LW
+           175 : 3008;  -- 	SHIFT	&H08
+           176 : 29C6;  -- 	OR	RW
+           177 : 4C04;  -- 	OUT	SEVENSEG
+           178 : 05C5;  -- 	LOAD	LW
+           179 : 0DC6;  -- 	ADD	RW
+           17A : 3002;  -- 	SHIFT	&H02		;div by 2
+           17B : 4C05;  -- 	OUT	SEVENSEG2
+           17C : 05C5;  -- 	LOAD	LW
+           17D : 11C6;  -- 	SUB	RW
+           17E : 0995;  -- 	STORE	GLD_DF
+           17F : 301F;  -- 	SHIFT	&H1F		;get top bit
+           180 : 3004;  -- 	SHIFT	&H04		;move to correct spot for shifter dir
+           181 : 0994;  -- 	STORE	GLD_DIR		
+           182 : 0595;  -- 	LOAD	GLD_DF		;the difference
+           183 : 418C;  -- 	CALL	ABS		;magnitude
+           184 : 7D93;  -- 	DIV	GLD_K		
+           185 : 2592;  -- 	AND	GLD_MSK		;get first four bits
+           186 : 2994;  -- 	OR	GLD_DIR		;attach the direction
+           187 : 0991;  -- 	STORE	GLD_SHIFT	
+           188 : 0596;  -- 	LOAD	GLD_0		;the base pattern for the leds
+           189 : 8591;  -- 	SHIFT3	GLD_SHIFT
+           18A : 4C01;  -- 	OUT	LEDS
+           18B : 4400;  -- 	RETURN
+           18C : 198E;  -- ABS:	JNEG	ABS1
+           18D : 4400;  -- 	RETURN
+           18E : 412C;  -- ABS1:	CALL	INVERT
+           18F : 4400;  -- 	RETURN
+           190 : 0007;  -- SEVEN:		DW	&H0007
+           191 : 0000;  -- GLD_SHIFT:	DW	&H0000
+           192 : 000F;  -- GLD_MSK:	DW	&H000F
+           193 : 0004;  -- GLD_K:		DW	&H0004
+           194 : 0000;  -- GLD_DIR:	DW	&H0000
+           195 : 0000;  -- GLD_DF:		DW	&H0000
+           196 : 0180;  -- GLD_0:		DW	&B0000000110000000
+           197 : 0000;  -- RDY_ST:		DW	&H0000
+           198 : 0001;  -- KEY2_ST:	DW	&H0001
+           199 : 0002;  -- RGHT_ST:	DW	&H0002
+           19A : 0003;  -- LEFT_ST:	DW	&H0003
+           19B : 0140;  -- DMAX:		DW	&H0140
+           19C : 0001;  -- TIME:		DW	&H0001
+           19D : 0000;  -- INVR:		DW	&H0000
+           19E : 000A;  -- ONESEC:     	DW	10
+           19F : 0000;  -- ZERO:		DW	&H0000
+           1A0 : 0001;  -- ONE:		DW	&H0001
+           1A1 : 0002;  -- TWO:		DW	&H0002
+           1A2 : 0004;  -- Key3Mask:   	DW  	&B00000100
+           1A3 : 0002;  -- Key2Mask:  	DW  	&B00000010
+           1A4 : 007F;  -- SpdMask:	DW	&b01111111
+           1A5 : 0400;  -- Sw15Mask:	DW	&h0400
+           1A6 : 0001;  -- EnSonar0:  	DW  	&B00000001
+           1A7 : 0002;  -- EnSonar1:	DW	&B00000010
+           1A8 : 0004;  -- EnSonar2:	DW  	&B00000100
+           1A9 : 0008;  -- EnSonar3:	DW  	&B00001000
+           1AA : 0010;  -- EnSonar4:	DW	&B00010000
+           1AB : 0020;  -- EnSonar5:	DW  	&B00100000
+           1AC : 0000;  -- LP:		DW	0				;left wheel position
+           1AD : 0000;  -- RP:		DW	0				;right wheel position
+           1AE : 0000;  -- LP_0:		DW	0
+           1AF : 0000;  -- RP_0:		DW	0
+           1B0 : 009A;  -- NTY:		DW	&H009A 			; a little less
+           1B1 : 0000;  -- IT_OS:		DW	&H0000			;Iniside-turn outside-wheel speed
+           1B2 : 0040;  -- IT_IS:		DW	&H0040			;etc.
+           1B3 : 0040;  -- OT_OS:		DW	&H0040
+           1B4 : 0000;  -- OT_IS:		DW	&H0000
+           1B5 : 0040;  -- SSPD:		DW	&H0040			; Straight speed
+           1B6 : 0000;  -- IW:		DW	0				; inside and outside adjustable wheel speeds
+           1B7 : 0000;  -- OW:		DW	0			
+           1B8 : 00B4;  -- t18:		DW	&H00B4
+           1B9 : 00DC;  -- t22:		DW	&H00DC
+           1BA : 00C8;  -- t20:		DW	&H00C8
+           1BB : 0142;  -- IT_THR:		DW	&H0142			; 32.2 cm
+           1BC : 03E8;  -- OT_THR:		DW	&H03E8			; 100cm
+           1BD : FFFF;  -- FFFF:		DW	&HFFFF
+           1BE : 7FFF;  -- H7FFF:		DW	&H7FFF
+           1BF : 001A;  -- k1:		DW	&H001A			; adjustment constants
+           1C0 : 001A;  -- k2:		DW	&H001A
+           1C1 : 0000;  -- MRR:		DW	&H0000
+           1C2 : 0017;  -- HA:		DW	&H0017
+           1C3 : 0000;  -- SHIFT_LDB:	DW	&H0000
+           1C4 : 00FF;  -- LED_BG:		DW	&H00FF
+           1C5 : 0000;  -- LW:		DW	&H0000
+           1C6 : 0000;  -- RW:		DW	&H0000
+  END;

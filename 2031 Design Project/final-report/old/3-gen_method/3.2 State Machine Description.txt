@@ -1,0 +1,17 @@
+3.2 State Machine Description
+
+The description of the states is listed below. The UML state machine diagram the team used to implement a solution is found in Fig. 6.
+
+--fig 6 uml--
+
+1. Forward: The robot moves forward alongside a wall. A tolerance of +/- 1 cm is used to keep the robot in a range of 19-21 cm from the wall. The distance to the wall is measured by taking the minimum value of sensors s0,s1 or s4,s5. If the robot is not in the specified range, it switches to one of the adjustment states, which are dependent upon which wall is followed. If a wall is detected in front of the robot by sensors s2 and s3, the robot will switch to the \inside turn" state. If no wall is detected by sensors s0,s1 or s4,s5, the robot will adjust inward until it is parallel to the new wall. 
+
+2. Adjust Outward: The robot veers slightly outwards to get back within the accepted distance range. After the robot is within the accepted distance range, the machine switches to the \forward" state.
+
+3. Adjust Inward: The robot veers slightly inwards to get back within the accepted distance range. After the robot is within the accepted distance range, the machine switches to the \forward" state.
+
+4. Inside Turn: The robot stops and turns 90 degrees clockwise or counterclockwise, depending on if the wall followed is on the right side or on the left side. Fig. 7 demonstrates this turn when the robot is following a right wall and is turning counterclockwise.
+
+
+--fig 7 inside turn--
+

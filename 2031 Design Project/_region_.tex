@@ -1,0 +1,51 @@
+\message{ !name(turning_sect.tex)}
+\message{ !name(turning_sect.tex) !offset(-2) }
+\section{Turning}
+The robot's turning algorithm takes advantage of the fact that the
+course only contains turns of approximately 90 degrees %degrees or deg.?
+The goal of the turning algorithm is not to pivot exactly 90 degrees
+and then move in a straight line every time, but rather to quickly execute a precise turn which results
+in the robot being approximately parallel to and 20 cm away from the
+opposite wall, after which the robot can easily continue using sonar
+data to make accurate adjustments.
+
+\subsection{Detecting a Turn}
+
+\subsection{Using the Rotary Encoders}
+
+The optical rotary encoders on each wheel of the Amigobot provide an
+incredibly fine yet robust way to detect the rotational position of
+each wheel. Each wheel's position can be loaded through \verb+SCOMP+'s
+I/O through the I/O addresses \verb+0x80, 0x81, 0x88,+ and
+\verb+0x89+, which correspond respectively to the given address names
+\verb+LPOSLOW, LPOSHIGH, RPOSLOW,+ and \verb+RPOSHIGH+. The position
+datum from each encoder is a 32-bit number. For I/O purposes, this datum
+is split into two 16-bit numbers (the upper 16 bits and the lower 16
+bits), each of which corresponds to the ``low'' or ``high'' I/O
+address for each wheel's position.
+
+\subsubsection{Physical Characteristics the Rotary Encoders}
+
+The encoder datum increments by \(39000\) for each revolution of the
+wheel. The left encoder increments when the left wheel is in forward
+motion, while the right encoder decrements when the right wheel is in
+forward motion. Each wheel has a diameter of 10 cm, which results in a
+path of 31.42 cm being traversed for each wheel revolution so long as
+traction is mantained. Since there are \(39000\) ``ticks'' per
+revolution, one centimeter of linear wheel motion corresponds to
+\(1241.41\) ticks. This results in very large-valued encoder data for
+relatively short distances. In order to simplify calculations and
+prevent bit carries between two 16-bit numbers (the high and low
+data), it is best to perform calculations on just one 16-bit number
+which can be produced by combining the upper 8 bits of the ``low''
+datum with the  lower 8 bits of the ``high'' datum, resulting in a
+reduction in encoder resolution by a factor of 256.  After shifting and truncating the two
+16-bit numbers into one 16-bit number, the physical characteristics
+of the encoder transform as such: 
+\[
+152.34 \frac{\text{ticks}}{\text{wheel revolution}}\\
+4.85 \frac{\text{ticks}}{\text{cm of linear wheel motion}}
+\]
+
+
+\message{ !name(turning_sect.tex) !offset(-51) }

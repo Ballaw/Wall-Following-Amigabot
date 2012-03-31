@@ -1,0 +1,281 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2009 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions
+# and other software and tools, and its AMPP partner logic
+# functions, and any output files from any of the foregoing
+# (including device programming or simulation files), and any
+# associated documentation or information are expressly subject
+# to the terms and conditions of the Altera Program License
+# Subscription Agreement, Altera MegaCore Function License
+# Agreement, or other applicable license agreement, including,
+# without limitation, that your use is for the sole purpose of
+# programming logic devices manufactured by Altera and sold by
+# Altera or its authorized distributors.  Please refer to the
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II
+# Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+# Date created = 11:44:36  July 23, 2010
+#
+set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2009 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions
+# and other software and tools, and its AMPP partner logic
+# functions, and any output files from any of the foregoing
+# (including device programming or simulation files), and any
+# associated documentation or information are expressly subject
+# to the terms and conditions of the Altera Program License
+# Subscription Agreement, Altera MegaCore Function License
+# Agreement, or other applicable license agreement, including,
+# without limitation, that your use is for the sole purpose of
+# programming logic devices manufactured by Altera and sold by
+# Altera or its authorized distributors.  Please refer to the
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II
+# Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+# Date created = 11:59:28  July 31, 2010
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		DE2bot_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name DEVICE EP2C35F672C6
+set_global_assignment -name TOP_LEVEL_ENTITY DE2bot
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:21:41  OCTOBER 02, 2011"
+set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP2"
+set_location_assignment PIN_N2 -to CLOCK_50
+set_location_assignment PIN_N25 -to SW[0]
+set_location_assignment PIN_N26 -to SW[1]
+set_location_assignment PIN_N1 -to SW[10]
+set_location_assignment PIN_P1 -to SW[11]
+set_location_assignment PIN_P2 -to SW[12]
+set_location_assignment PIN_T7 -to SW[13]
+set_location_assignment PIN_U3 -to SW[14]
+set_location_assignment PIN_U4 -to SW[15]
+set_location_assignment PIN_P25 -to SW[2]
+set_location_assignment PIN_AE14 -to SW[3]
+set_location_assignment PIN_AF14 -to SW[4]
+set_location_assignment PIN_AD13 -to SW[5]
+set_location_assignment PIN_AC13 -to SW[6]
+set_location_assignment PIN_C13 -to SW[7]
+set_location_assignment PIN_B13 -to SW[8]
+set_location_assignment PIN_A13 -to SW[9]
+set_location_assignment PIN_U23 -to DI[0]
+set_location_assignment PIN_U24 -to DI[1]
+set_location_assignment PIN_R19 -to DI[2]
+set_location_assignment PIN_T19 -to DI[3]
+set_location_assignment PIN_U20 -to DI[4]
+set_location_assignment PIN_V26 -to DI[5]
+set_location_assignment PIN_U25 -to DI[6]
+set_location_assignment PIN_U26 -to DI[7]
+set_location_assignment PIN_T20 -to DI[8]
+set_location_assignment PIN_T21 -to DI[9]
+set_location_assignment PIN_T18 -to DI[10]
+set_location_assignment PIN_G26 -to KEY[0]
+set_location_assignment PIN_N23 -to KEY[1]
+set_location_assignment PIN_P23 -to KEY[2]
+set_location_assignment PIN_W26 -to KEY[3]
+set_location_assignment PIN_AE22 -to LEDG[0]
+set_location_assignment PIN_AF22 -to LEDG[1]
+set_location_assignment PIN_W19 -to LEDG[2]
+set_location_assignment PIN_V18 -to LEDG[3]
+set_location_assignment PIN_U18 -to LEDG[4]
+set_location_assignment PIN_U17 -to LEDG[5]
+set_location_assignment PIN_AA20 -to LEDG[6]
+set_location_assignment PIN_Y18 -to LEDG[7]
+set_location_assignment PIN_AE23 -to LEDR[0]
+set_location_assignment PIN_AF23 -to LEDR[1]
+set_location_assignment PIN_AA13 -to LEDR[10]
+set_location_assignment PIN_AC14 -to LEDR[11]
+set_location_assignment PIN_AD15 -to LEDR[12]
+set_location_assignment PIN_AE15 -to LEDR[13]
+set_location_assignment PIN_AF13 -to LEDR[14]
+set_location_assignment PIN_AE13 -to LEDR[15]
+set_location_assignment PIN_AE12 -to LEDR[16]
+set_location_assignment PIN_AD12 -to LEDR[17]
+set_location_assignment PIN_AB21 -to LEDR[2]
+set_location_assignment PIN_AC22 -to LEDR[3]
+set_location_assignment PIN_AD22 -to LEDR[4]
+set_location_assignment PIN_AD23 -to LEDR[5]
+set_location_assignment PIN_AD21 -to LEDR[6]
+set_location_assignment PIN_AC21 -to LEDR[7]
+set_location_assignment PIN_AA14 -to LEDR[8]
+set_location_assignment PIN_Y13 -to LEDR[9]
+set_location_assignment PIN_AF10 -to HEX0[0]
+set_location_assignment PIN_AB12 -to HEX0[1]
+set_location_assignment PIN_AC12 -to HEX0[2]
+set_location_assignment PIN_AD11 -to HEX0[3]
+set_location_assignment PIN_AE11 -to HEX0[4]
+set_location_assignment PIN_V14 -to HEX0[5]
+set_location_assignment PIN_V13 -to HEX0[6]
+set_location_assignment PIN_V20 -to HEX1[0]
+set_location_assignment PIN_V21 -to HEX1[1]
+set_location_assignment PIN_W21 -to HEX1[2]
+set_location_assignment PIN_Y22 -to HEX1[3]
+set_location_assignment PIN_AA24 -to HEX1[4]
+set_location_assignment PIN_AA23 -to HEX1[5]
+set_location_assignment PIN_AB24 -to HEX1[6]
+set_location_assignment PIN_AB23 -to HEX2[0]
+set_location_assignment PIN_V22 -to HEX2[1]
+set_location_assignment PIN_AC25 -to HEX2[2]
+set_location_assignment PIN_AC26 -to HEX2[3]
+set_location_assignment PIN_AB26 -to HEX2[4]
+set_location_assignment PIN_AB25 -to HEX2[5]
+set_location_assignment PIN_Y24 -to HEX2[6]
+set_location_assignment PIN_Y23 -to HEX3[0]
+set_location_assignment PIN_AA25 -to HEX3[1]
+set_location_assignment PIN_AA26 -to HEX3[2]
+set_location_assignment PIN_Y26 -to HEX3[3]
+set_location_assignment PIN_Y25 -to HEX3[4]
+set_location_assignment PIN_U22 -to HEX3[5]
+set_location_assignment PIN_W24 -to HEX3[6]
+set_location_assignment PIN_U9 -to HEX4[0]
+set_location_assignment PIN_U1 -to HEX4[1]
+set_location_assignment PIN_U2 -to HEX4[2]
+set_location_assignment PIN_T4 -to HEX4[3]
+set_location_assignment PIN_R7 -to HEX4[4]
+set_location_assignment PIN_R6 -to HEX4[5]
+set_location_assignment PIN_T3 -to HEX4[6]
+set_location_assignment PIN_T2 -to HEX5[0]
+set_location_assignment PIN_P6 -to HEX5[1]
+set_location_assignment PIN_P7 -to HEX5[2]
+set_location_assignment PIN_T9 -to HEX5[3]
+set_location_assignment PIN_R5 -to HEX5[4]
+set_location_assignment PIN_R4 -to HEX5[5]
+set_location_assignment PIN_R3 -to HEX5[6]
+set_location_assignment PIN_R2 -to HEX6[0]
+set_location_assignment PIN_P4 -to HEX6[1]
+set_location_assignment PIN_P3 -to HEX6[2]
+set_location_assignment PIN_M2 -to HEX6[3]
+set_location_assignment PIN_M3 -to HEX6[4]
+set_location_assignment PIN_M5 -to HEX6[5]
+set_location_assignment PIN_M4 -to HEX6[6]
+set_location_assignment PIN_L3 -to HEX7[0]
+set_location_assignment PIN_L2 -to HEX7[1]
+set_location_assignment PIN_L9 -to HEX7[2]
+set_location_assignment PIN_L6 -to HEX7[3]
+set_location_assignment PIN_L7 -to HEX7[4]
+set_location_assignment PIN_P9 -to HEX7[5]
+set_location_assignment PIN_N9 -to HEX7[6]
+set_location_assignment PIN_Y12 -to LEDG[8]
+set_location_assignment PIN_D13 -to CLOCK_27
+set_location_assignment PIN_J1 -to LCD_DATA[0]
+set_location_assignment PIN_J2 -to LCD_DATA[1]
+set_location_assignment PIN_H1 -to LCD_DATA[2]
+set_location_assignment PIN_H2 -to LCD_DATA[3]
+set_location_assignment PIN_J4 -to LCD_DATA[4]
+set_location_assignment PIN_J3 -to LCD_DATA[5]
+set_location_assignment PIN_H4 -to LCD_DATA[6]
+set_location_assignment PIN_H3 -to LCD_DATA[7]
+set_location_assignment PIN_K3 -to LCD_EN
+set_location_assignment PIN_L4 -to LCD_ON
+set_location_assignment PIN_K1 -to LCD_RS
+set_location_assignment PIN_K4 -to LCD_RW
+set_location_assignment PIN_V1 -to SW[16]
+set_location_assignment PIN_V2 -to SW[17]
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_location_assignment PIN_M22 -to ALIVE
+set_location_assignment PIN_T22 -to ENC_L_A
+set_location_assignment PIN_R25 -to ENC_L_B
+set_location_assignment PIN_T24 -to ENC_R_A
+set_location_assignment PIN_R20 -to ENC_R_B
+set_location_assignment PIN_N20 -to EXTMODE
+set_location_assignment PIN_M24 -to NMOTR_L
+set_location_assignment PIN_N24 -to NMOTR_R
+set_location_assignment PIN_M21 -to PFD1
+set_location_assignment PIN_M25 -to PFD2
+set_location_assignment PIN_R24 -to PHASE_L
+set_location_assignment PIN_P24 -to PHASE_R
+set_location_assignment PIN_M20 -to PWR_FAIL
+set_location_assignment PIN_M19 -to SLEEP
+set_location_assignment PIN_K25 -to WATCH_ST
+set_location_assignment PIN_V23 -to SONAR_SEL[2]
+set_location_assignment PIN_V25 -to SONAR_SEL[1]
+set_location_assignment PIN_W23 -to SONAR_SEL[0]
+set_location_assignment PIN_W25 -to SONAR_INIT
+set_location_assignment PIN_U21 -to SONAR_BLANK
+set_location_assignment PIN_D25 -to TP1
+set_location_assignment PIN_J22 -to TP2
+set_location_assignment PIN_D25 -to LA[0]
+set_location_assignment PIN_J22 -to LA[1]
+set_location_assignment PIN_E26 -to LA[2]
+set_location_assignment PIN_E25 -to LA[3]
+set_location_assignment PIN_F24 -to LA[4]
+set_location_assignment PIN_F23 -to LA[5]
+set_location_assignment PIN_J21 -to LA[6]
+set_location_assignment PIN_J20 -to LA[7]
+set_location_assignment PIN_F25 -to LA[8]
+set_location_assignment PIN_F26 -to LA[9]
+set_location_assignment PIN_N18 -to LA[10]
+set_location_assignment PIN_P18 -to LA[11]
+set_location_assignment PIN_G23 -to LA[12]
+set_location_assignment PIN_G24 -to LA[13]
+set_location_assignment PIN_K22 -to LA[14]
+set_location_assignment PIN_G25 -to LA[15]
+
+set_global_assignment -name MISC_FILE "C:/Documents and Settings/tc3/My Documents/DigitalDesignLab/DesignFiles/DE2Amigobot/DE2botFall2010.dpf"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name STRATIX_CONFIGURATION_DEVICE EPCS16
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_location_assignment PIN_V24 -to SONAR_ECHO
+set_global_assignment -name MISC_FILE "C:/Users/tc3/Documents/DigitalDesignLab/DesignFiles/DE2AmigobotFall2011/DE2botFall2011.dpf"
+set_global_assignment -name VHDL_FILE sonar.vhd
+set_global_assignment -name VHDL_FILE io_decoder0.vhd
+set_global_assignment -name AHDL_FILE lpm_add_sub0.tdf
+set_global_assignment -name AHDL_FILE lpm_bustri2.tdf
+set_global_assignment -name VHDL_FILE lpm_constant0.vhd
+set_global_assignment -name VHDL_FILE lpm_counter0.vhd
+set_global_assignment -name AHDL_FILE lpm_dff0.tdf
+set_global_assignment -name AHDL_FILE lpm_mult1.tdf
+set_global_assignment -name BDF_FILE OpticalEncoder.bdf
+set_global_assignment -name BDF_FILE posn_vel.bdf
+set_global_assignment -name BDF_FILE quadrature_decode.bdf
+set_global_assignment -name VHDL_FILE ACC_CLK_GEN.VHD
+set_global_assignment -name SOURCE_FILE altpll0.cmp
+set_global_assignment -name VHDL_FILE altpll0.vhd
+set_global_assignment -name SOURCE_FILE altsyncram0.cmp
+set_global_assignment -name VHDL_FILE altsyncram0.vhd
+set_global_assignment -name VHDL_FILE dig_in.vhd
+set_global_assignment -name VHDL_FILE hex_disp.vhd
+set_global_assignment -name VHDL_FILE LEDS.vhd
+set_global_assignment -name SOURCE_FILE lpm_bustri1.cmp
+set_global_assignment -name VHDL_FILE lpm_bustri1.vhd
+set_global_assignment -name VHDL_FILE scomp.vhd
+set_global_assignment -name VHDL_FILE slcd.vhd
+set_global_assignment -name VHDL_FILE timer.vhd
+set_global_assignment -name QIP_FILE lpm_bustri0.qip
+set_global_assignment -name BDF_FILE DE2bot.bdf
+set_global_assignment -name VHDL_FILE Vel_Control.vhd
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_L25 -to INT_10HZ
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

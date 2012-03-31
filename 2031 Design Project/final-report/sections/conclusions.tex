@@ -1,0 +1,68 @@
+\section{Conclusions}
+
+\subsection{Overview}
+
+Overall, the design allowed the robot to successfully complete the
+course. The design met all specifications. However, maintaining a
+constant distance to the wall proved to be a challenge. While the
+robot did not have problems maintaining accuracy when following the
+right wall, it was unable to produce the same results when following the
+left wall. Accuracy on the right wall following depended strongly on
+suppressing the speed of the robot. The robot completed both courses
+without collisions and penalties. 
+
+\subsection{Strengths and Weaknesses of Design}
+
+There are several strengths of this design. The robot is able to
+successfully complete the course and avoid collisions. The design
+allows the robot to run at variable speeds chosen by the user by
+selecting switches on the DE2 board. The informative display greatly
+helps in debugging processes and provides insight into how the program
+is running. 
+
+A weakness of this design is that the Amigobot cannot utilize its
+speediness and complete the course successfully without
+collisions. Extra time, in the form of slow movement, must be used in
+order to accurately follow the wall. Additionally, the algorithm
+itself is inefficient and produces inconsistent results. The
+inefficiency stems from the multiple 100  ms wait loops in the adjustment states that
+slow down sensory input tremendously. Wall following inconsistency may be attributed to
+an inflexible algorithm unable to handle sensor inaccuracies.
+
+\subsection{Recommendations}
+
+For future work, a useful development would be to show the moving
+states on the LCD display as initially proposed. This would allow for quicker and more
+effective debugging and would be a useful addition to the display. 
+
+Another development would be to encode the green LEDs to show more
+functions as they are executed. The current design uses the green LEDs
+only as a completion bar for the ``inside turn'' state. Animating the LEDs
+for other states could aid in debugging purposes and improve the
+display. 
+
+While this design takes the minimum of two adjacent sensory values, it
+could be edited to use weighted values of the sensors. Allowing some
+sensors to take precedence over others would allow the robot to
+accurately determine its orientation relative to the wall. 
+
+Due to limited computational resources in assembly language, the
+measurement algorithm used to detect turns is not as accurate as
+desired. A major improvement to the program would be to compute a more
+accurate measurement algorithm, such as averaging the forward sensor
+data over multiple instances of time.
+
+\subsection{Optimizations}
+
+In order to optimize the design, the 100 ms wait loops should be removed
+from the adjustment states. The loops decrease the frequency of adjustment
+greatly, which prevents the robot from moving too quickly. In order to
+remove the wait loops, the adjustment states would have to be
+rewritten in order to remove cumulative additions. 
+
+Additionally, the invalid value of the sonar sensors should be changed
+from \verb+0xFFFF+ (\(-1\)) to a large positive number,
+\verb+0x7FFF+ (32767). Since the code implemented includes many \verb+JNEG+
+instructions, this would prevent having to include special
+consideration for invalid sensor readings. Ideally, this would be
+changed at the hardware level of the sonar sensors. 

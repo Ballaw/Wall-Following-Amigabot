@@ -1,0 +1,10 @@
+
+\begin{minipage}{4in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/outside_turn.png}
+\cprotect \caption{Geometery of an outside turn. \(L\) represents
+  the distance between the side sensor (\(s_0\) or \(s_5\)) and the
+  wheel axis.}
+\label{ot}
+\end{minipage}
+^^E^^L 

@@ -1,0 +1,24 @@
+\section{Management Plan}
+The design will be executed according to the Gantt chart provided in Appendix A. 
+
+\subsection{Contingency Plan}
+In the event that the team cannot complete all tasks before the
+deadline, the team will implement the state machine with the states 
+``forward,''  ``adjust inward,'' ``adjust outward,'' ``inside turn,'' and
+``outside turn.'' These requirements are fundamental to the wall following 
+solution algorithm. Additional features outlined in \ref{xtras} will 
+be implemented as time and resources permit.  
+
+In the event that the presented algorithm does not adequately provide
+a means for the Amigobot to follow a wall, a different, slower, and smoother
+algorithm will be implemented. This backup program will eliminate the
+need for the ``outside turn'' state and adjustment states, instead
+continuously and smoothly adjusting the wheel velocities in forward
+motion depending on
+how far the robot is from the parallel wall. When there is a parallel
+wall discontinuity, the measured distance will jump high and the robot
+will adjust by increasing the outside wheel velocity, effectively
+turning automatically. Inside turns will be accomplished by stopping
+the robot when it is close to a forward obstacle, then rotating in
+place until the front sensor, \(s_2\) or \(s_3\), no longer detects a
+forward obstacle, whereupon forward motion will continue.

@@ -1,0 +1,10 @@
+3.4 Scomp alterations
+
+Several alterations to the SCOMP program were made: 
+1. MULT  - The team used the built-in multiplier LPM_MULT. The result of the multiplication was speard across registers MLO and MHI. This was used for __. 
+2. MLO - This register moves contents of LO register into accumulator in order to ___
+3. MHI - This register moves contents of HI register into accumulator in order to ___
+4. DIV and REM - The team used the built-in divider module LPM_DIVIDE to ___. 
+5.SHIFT2 and SHIFT3 - The team used the built-in shifter module LPM_CLSHIFT. SHIFT2 implemented a variable shifter. SHIFT3 implemented a rotating shifter. These were used in __. 
+
+

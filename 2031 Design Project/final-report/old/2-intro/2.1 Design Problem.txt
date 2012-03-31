@@ -1,0 +1,17 @@
+2.1 Design Problem
+
+The goal of this project is to design a SCOMP wall following program that enables the Amigobot to follow walls. The design solution meets the following specications:
+
+1. Use an eight bit velocity command where +127 (0x007F) is full speed forward, -127 (0xFF81) is full speed reverse, and zero is stop.
+2. Control position by reading the cumulative rotation counter of the wheel.
+3. Use velocity feedback and position feedback from the wheels via the existing optical encoder peripheral.
+4. Provide a start button to begin execution after the robot is placed adjacent to a wall.
+5. Use existing sonar and velocity control peripherals to issue commands to each wheel.
+6. Travel parallel to a wall at a distance of 20 cm.
+7. Select by switch or recompile to follow left or right walls.
+
+The Amigobot was expected to navigate a course without collisions and in a specified time frame. A sample course layout is shown in Fig. 1.
+
+In addition to the required specifications, the wall following program improved the user interface of the robot by enhancing the 7-segment, LCD, and LED displays.
+
+**Figure 1. Sample course layout for robotic wall-following.**

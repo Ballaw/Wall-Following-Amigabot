@@ -1,0 +1,23 @@
+
+    \begin{minipage}{5.5in}
+      \centering
+      \small
+     \cprotect \caption{Results of wall following demo}
+      \label{results}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        &\multicolumn{3}{|c|}{\textbf{Completeness} (\%)}&
+        \multicolumn{3}{|c|}{\textbf{Accuracy} (\%)}&
+        \multicolumn{3}{|c|}{\textbf{Time} (min:sec)} \\ \hline
+        &\textbf{Exp.}&\textbf{Act.}&\textbf{Diff.}&
+        \textbf{Exp.}&\textbf{Act.}&\textbf{Diff.}&
+        \textbf{Exp.}&\textbf{Act.}&\textbf{Diff.}  \\
+        \hline
+        \textbf{Right Wall} & 100\% & 100\% & - & 100\% & 100\% & - &
+        1:15 & 1:23 & 0:08 \\ \hline
+        \textbf{Left Wall} & 100\% & 100\% & - & 100\% & 0\% & 100\% &
+        1:15 & 5:52 & 4:37 \\ \hline
+        \multicolumn{7}{|l|}{\textbf{Total Time}} & 2:30 & 6:15 & 3:45 \\ \hline
+      \end{tabular}
+    \end{minipage}
+  ^^E^^L 

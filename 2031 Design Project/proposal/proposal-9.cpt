@@ -1,0 +1,8 @@
+
+\begin{minipage}{3in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/s2s3.png}
+\cprotect \caption{Sensors \(s_2\) and \(s_3\) measuring distance to front wall.}
+\label{s2s3}
+\end{minipage}
+^^E^^L 

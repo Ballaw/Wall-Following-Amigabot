@@ -1,0 +1,8 @@
+
+\begin{minipage}{2.5in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/s0s5t.png}
+\cprotect \caption{Sensors \(s_0\) and \(s_5\) detecting outside corner.}
+\label{s0s5t}
+\end{minipage}
+^^E^^L 

@@ -1,0 +1,42 @@
+-- LEDS.VHD (a peripheral module for SCOMP)
+-- 2006.10.08
+--
+-- This module drives the UP3 board LEDs and latches data on the rising edge of CS.
+
+
+LIBRARY IEEE;
+LIBRARY LPM;
+
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE LPM.LPM_COMPONENTS.ALL;
+
+
+ENTITY LEDS IS
+  PORT(
+    RESETN      : IN  STD_LOGIC;
+    CS          : IN  STD_LOGIC;
+    LED         : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    IO_DATA     : IN  STD_LOGIC_VECTOR(15 DOWNTO 0)
+  );
+END LEDS;
+
+
+ARCHITECTURE a OF LEDS IS
+  SIGNAL BLED : STD_LOGIC_VECTOR(15 DOWNTO 0);
+
+  BEGIN
+    LED <= BLED;
+
+
+    PROCESS (RESETN, CS)
+      BEGIN
+        IF (RESETN = '0') THEN
+          BLED <= x"0000";
+        ELSIF (RISING_EDGE(CS)) THEN
+          BLED <= IO_DATA;
+        END IF;
+      END PROCESS;
+  END a;
+

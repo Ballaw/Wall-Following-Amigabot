@@ -1,0 +1,82 @@
+%! program = pdflatex
+
+\documentclass[11pt, final]{article}
+\usepackage{geometry}
+\geometry{letterpaper} 
+\usepackage{cite}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{verbatim}
+\usepackage{moreverb}
+\usepackage{setspace}
+\usepackage{cprotect}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage[labelsep=period, bf, singlelinecheck=false]{caption}
+\usepackage[title]{appendix}
+%\usepackage[T1]{fontenc}
+%\usepackage{times}
+ 
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\textwidth6.5in
+\oddsidemargin0in
+\topmargin-.75in
+\headheight.5in
+\headsep.125in
+\textheight9in 
+
+\def\verbatimtabsize{4\relax} 
+
+\titleformat{\chapter}[display]{\vspace{0.3\textheight}\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter :}{20pt}{\Huge}
+\titleformat{\section}{\LARGE\bfseries}{\thesection}{1em}{}{}
+\titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}{}
+\titleformat{\paragraph}[hang]{\normalsize\bfseries}{\theparagraph}{1em}{}{}
+
+\renewcommand{\labelitemii}{\(\circ\)}
+
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+%\maketitle
+\doublespacing
+\setcounter{secnumdepth}{4}
+\input{./title.tex}
+
+%\begin{abstract}
+%Hello!
+%\end{abstract}
+
+\input{./sections/exec_summ.tex}
+\input{./sections/techn_appr.tex}
+\input{./sections/mngnt_plan.tex}
+\input{./sections/append.tex}
+
+
+%\bibliographystyle{IEEEtran}
+%\bibliography{IEEEabrv,bib-1}
+
+\end{document}
+
+
+
+%\begin{figure}[h!]
+%\centering
+%\cprotect \fbox{
+%\begin{minipage}{6.5in}
+%\centering
+%\includegraphics[width =  \textwidth]{img_here}
+%\cprotect \caption{}
+%\end{minipage}
+%}
+%\end{figure}
+

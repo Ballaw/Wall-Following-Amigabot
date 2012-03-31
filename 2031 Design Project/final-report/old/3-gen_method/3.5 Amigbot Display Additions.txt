@@ -1,0 +1,31 @@
+3.5 Amigobot Display Additions: 
+
+Several additions were made to the robot display to improve the user interface. Memory locations written to and read from are designated in capital letters.
+
+ Two displays are used to show the velocity of the left and right wheels. 
+	These are written to SEVENSEG whenever LVELCMD or RVELCMD, the wheel velocities, are changed. (fig 8)
+
+The third display shows the velocity of the robot. (fig 8)
+ 	This was done by altering the IO_decoder and the block diagram files so that the second set of four 7-segment displays could be written. It is named SEVENSEG2 and mapped to 0x05 on the IO address space map.
+ 	IO_decoder was altered by adding and enabling a signal for the second set of the 7-segment LEDs and copying the setup of the HEX_DISP module used for the current 7-segment display.
+
+ The LCD display shows the state the program is in. (fig 9)
+     This was done by altering the LCD display to accept ASCII values representing
+numbers. The SLCD was altered to take in an ASCII enable, ASCII_EN, which
+tells it to interpret the incoming argument as a state to be output in ASCII format.
+     There are four states. The LCD displays RDY! when the program is ready to start. It then displays KEY2 to tell the user to press KEY2 and start the program. Once the program starts, the screen displays LEFT or RGHT, telling the user which side of the wall the robot is following. 
+	The states were encoded into a binary code of 16 bits. For example, the RDY! was encoded as 0x0 and the KEY2 command as 0x1. The strings shown on the LCD display were hard coded using the binary state representations.
+
+ The red LEDs light up to show the displacement from the straight path. (fig 10)
+     Two LEDs in the middle are always lit. If the robot has to adjust left, the lights move towards the left side of the display and vice versa. This function is like a turning wheel and shows how far the robot has deviated from the straight path. 
+     The red LED I/O has already been implemented in SCOMP at I/O address space 0x01. (how else was it done?)
+
+ The green LEDs are used to display a loading bar for the inside turn state. (fig 10)
+	This was be done by altering the IO_decoder and the BDF files so that the green LEDs can be used. It is called GLEDS and mapped to 0x07 on the IO address space map.
+
+3.5.1 Assignments
+
+The switch and button assignments on the DE2 board are shown in fig 11. 
+Switches zero through six were used to encode the speed at which the robot will travel in binary. Switch ten selects which wall is to be followed. 
+To start the program, a series of steps must be followed. First, the switches are toggled into the desired positions. Second, key 0 is pressed to reset. Third, key 3 is pressed to initialize the robot. Lastly, key 2 is pressed to start the program. 
+

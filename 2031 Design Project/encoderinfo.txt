@@ -1,0 +1,11 @@
+Optical Encoder information:
+
+Notes to Me: check pos/neg vals of encoder
+
+Get rotational position of each wheel by reading LPOSLOW or RPOSLOW. Each represent 16 bits of ticks of the angular position of each wheel. There are X number of ticks per wheel revolution. (note: I believe this to be 39000, but I need to test it to verify)
+
+After wheel rotates by a certain amount (2^16/X), the 16-bit position vector will overflow and start at zero again. Since most of the distances we are using are less than 2^16/X (which is about 1.7 revolutions of the wheel if X=39000) we should be able to get away with just using the lower 16 bits and ignoring LPOSHIGH and RPOSHIGH.
+
+During normal usage, since I don't think we can actively reset the encoder tick count, it is certain that when we are using the encoder the initial value will not be at zero, so it is probable that the vector will overflow anyway during normal usage even if we are moving small distances. This can be remedied by adding or subtracting 2^16 (depending whether we are moving forwards or backwards) to the difference in two measured values, depending on whether the absolute difference is in the desired nominal range specified.
+
+e.g. given M = 2^16, lets say at t0 the encoder outputted a value of M-30. The wheel rotated forward, overflowed M, then at t1 the output was 40. The actual ticks traveled is 70, but 40-(M-30) is 70-M. Therefore, we add M to the difference of the two values to get the real value.

@@ -1,0 +1,21 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 1024;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..3FF] : 0000;  -- Default to NOP
+
+           000 : 4803;  -- Start:	IN	XIO
+           001 : 2407;  --         AND     Key3Mask  		; Is the user pressing key 3?
+           002 : 1C00;  --         JPOS   	Start
+           003 : 0406;  --         LOAD	A	
+           004 : 4C04;  -- 	OUT	SEVENSEG
+           005 : 1405;  -- HERE:	JUMP	HERE
+           006 : 0001;  -- A:	DW	1
+           007 : 0004;  -- Key3Mask:   	DW  	&B00000100
+  END;

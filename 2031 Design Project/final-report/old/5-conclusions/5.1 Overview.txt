@@ -1,0 +1,3 @@
+5.1 Overview 
+
+Overall, the design allowed the robot to successfully complete the course. The design met all specifications. However, maintaing a constant distance to the wall proved to be a challenge. While the robot did not have problems maintaining accuracy when following the right wall, it was unable to repeat the performance when following the left wall. Accuracy on the right wall following depended strongly on suppressing the speed of the robot. The robot completed both courses without collisions and penalties. 

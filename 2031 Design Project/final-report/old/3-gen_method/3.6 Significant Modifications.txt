@@ -1,0 +1,10 @@
+3.6 Significant Modifications
+
+Several significant modifications were made to the original design. 
+
+The original program consisted of five states. During testing it was discovered that the \outside turn" state caused ________. To solve this problem, the state was removed. To navigate outside turns, the \adjust inward" state is used. A subroutine in this state limits the value of the lateral sensors to prevent the robot from turning too sharply. 
+
+It was the team's original intentions to use the LCD display to show the state that the program is currently in. However, the team encountered problems getting ___. To solve this problem, the role of the LCD display was changed to display the basic startup states and not the current state. 
+
+The original design called for one lateral sensor (s0 or s5) and one forward sensor (s2 or s3) who data would serve as inputs to the state machine. It was later discovered that taking the minimum value of two adjacent sensors (S0 and s1, S4 and s5), gave more accurate readings of distance and contributed to the robot maintaining a consistent 20 cm distance from the wall. 
+

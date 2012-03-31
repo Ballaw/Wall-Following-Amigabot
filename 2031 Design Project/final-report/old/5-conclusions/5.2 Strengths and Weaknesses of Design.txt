@@ -1,0 +1,5 @@
+5.2 Strengths and Weaknesses of Design  
+
+There are several strengths of this design. The robot is able to successfully complete the course and avoid collisions. The design allows the robot to run at variable speeds chosen by the user by selecting switches on the DE2 board. The informative display greatly helps in debugging processes and provides insight into how the program is running. 
+
+A weakness of this design is that the robot cannot utilize its speediness and complete the course successfully without collisions. Extra time, in the form of slow movement, must be used in order to accurately follow the wall. Additionally, the algorithm itself is inefficient and produces inconsistent results. The inefficiency stems from the multiple wait loops in the program that slow it down tremendously. Inconsistency may be attributed to inaccurate sensor readings. Testing different robots on the same course showed that what tweaks in the program worked for one robot would not work for another. 

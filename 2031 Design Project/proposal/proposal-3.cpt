@@ -1,0 +1,8 @@
+
+\begin{minipage}{3.5in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/flowchart.png}
+\cprotect \caption{Flow chart of wall following algorithm.}
+\label{flowchart}
+\end{minipage}
+^^E^^L 

@@ -1,0 +1,10 @@
+
+    \begin{minipage}{6.5in}
+      \centering
+      \includegraphics[width =
+      \textwidth]{./graphics/smdiagram.png}
+      \cprotect \caption{UML state machine diagram for wall following
+        algorithm for Amigobot.}
+      \label{state}
+    \end{minipage}
+  ^^E^^L 

@@ -1,0 +1,31 @@
+\section{Executive Summary}
+The team will design a SCOMP wall following program for the Amigobot
+using sonar feedback to determine what velocity commands to send to
+each wheel, enabling the robot to locate and travel parallel to a
+wall. The wall has inner and outer corners of approximately \(90^\circ\) that the robot must
+navigate. 
+
+ The team will design a solution to this problem in the form
+of a state machine program that executes commands based on the current
+state and the measured distance to the nearest wall. The state machine
+consists of six states: ``forward motion,'' ``inside turn,'' ``outside
+turn,'' ``adjust outward,'' and ``adjust inward.'' In ``forward
+motion,'' the robot will move forward full speed until it senses a
+wall in front of it or no wall is sensed. If a wall is sensed in front
+of the Amigobot, the program switches to the ``inside turn'' state,
+turns \(90^\circ\), then proceeds to travel forward. If no wall is sensed, the
+Amigobot will switch to the ``outside turn'' state, turn \(90^\circ\), and
+continue forward. A switch is used to toggle between following a wall
+on the left side or on the right side of the robot. The switch position will determine
+turning direction, and it will select which ultrasonic sensors will be
+used to measure distance. Parallel motion to the wall will be
+maintained by switching to ``adjust outward'' and ``adjust inward''
+states, which will correct the robot trajectory if the measured
+distance is not within an acceptable range of \(20\pm2\) cm.  
+
+The strength of this approach is that navigation of wall corners will not
+depend on sensor data. Sensor data is not a dependable measure of
+distance to the wall when the sensor is not perpendicular to the
+wall. As the Amigobot turns, the sensors are not aligned with the wall
+and give incorrect measurements of distance, which can result in
+collisions with the wall and loss of orientation relative to the wall.

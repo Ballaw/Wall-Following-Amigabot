@@ -1,0 +1,10 @@
+
+\begin{minipage}{3in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/s0s5.png}
+\cprotect \caption{Sensors \(s_0\) and \(s_5\) measuring
+distance to wall.
+}
+\label{s0s5}
+\end{minipage}
+^^E^^L 

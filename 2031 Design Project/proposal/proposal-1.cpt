@@ -1,0 +1,8 @@
+
+\begin{minipage}{3.5in}
+\centering
+\includegraphics[width =  \textwidth]{graphics/course.png}
+\cprotect \caption{Sample course layout for robotic wall-following.}
+\label{course}
+\end{minipage}
+^^E^^L 

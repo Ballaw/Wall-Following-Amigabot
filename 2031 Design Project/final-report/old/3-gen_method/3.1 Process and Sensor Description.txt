@@ -1,0 +1,23 @@
+3.1 Process and Sensor Description
+
+The wall following algorithm to be implemented follows the process found in Fig. 2.
+
+--fig 2 flow chart of wall following algorithm--
+
+A switch will be used to toggle between following the left wall and following the right wall.
+
+The value of the switch determines which sensors are actively collecting data. The values of the following sensors will be used:
+-Minimum values of sensor (s0 and s1) or (s4 and s5):
+       Measure the distance to the closest parallel wall (Fig. 3).
+-Sensor s2 or s3:
+       Measure the distance to approaching wall (Fig. 5).
+
+
+
+fig 3
+
+
+
+fig 5
+
+

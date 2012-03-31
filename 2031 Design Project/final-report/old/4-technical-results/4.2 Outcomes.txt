@@ -1,0 +1,8 @@
+4.2 Outcomes 
+
+The results from the final demonstration and test runs suggest that the robot can consistently and accurately complete a wall following course on its right side.
+ 
+When following a left wall course, it is unable to maintain constant distance and has trouble executing inside turns. The robot exhibits swerving behavior when following the left-sided course and is often dangerously close to the wall. 
+
+On either course, the robot must move slowly to avoid collisions with the wall. This may be a result of the timing delays added into the program that do not allow sensory data to be processed quickly enough to maintain distance to the wall at higher speeds.  
+

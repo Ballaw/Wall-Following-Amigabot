@@ -1,0 +1,8 @@
+
+    \begin{minipage}{4.5in}
+      \centering
+      \includegraphics[width = \textwidth]{graphics/lcd.jpg}
+      \cprotect \caption{The LCD display on the DE2 board.}
+      \label{lcd}
+    \end{minipage}
+  ^^E^^L 

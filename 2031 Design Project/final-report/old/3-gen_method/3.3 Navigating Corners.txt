@@ -1,0 +1,27 @@
+3.3 Navigating Corners 
+The robot's turning algorithm takes advantage of the course only containing turns of approximately 90 degrees. Such sharp turns are not conducive towards \smooth" wall following techniques. Therefore, when necessary, the robot will execute a blind turn which relies on the optical rotary encoders on each wheel instead of the sonar data. The goal of the turning algorithm is not to pivot exactly 90 degrees and then move in a straight line every time, but rather to quickly execute a precise turn which results in the robot being approximately parallel to and 20 cm away from the opposite wall, after which the robot can easily continue using sonar data to make accurate adjustments.
+
+3.3.1 Detecting a Turn
+The turning algorithm implemented requires accurate detection of forward obstacles and discontinuities in the parallel wall in order to avoid turning prematurely.
+
+For an inside turn, the robot begins turning once the front of the robot reaches the threshold IT_THR. The geometry for this turn is presented in Fig. 7, which indicates that IT_THR should be 31:5 cm. However, the forward sensors s2 and s3 are not pointed directly forward, but rather are at 12 degree angles, so the sensor reading for IT_THR should be 31:5 / cos(12 degrees) = 32.2 cm before the robot begins an inside turn. The inside turn is executed by stopping the inside wheel while driving the outside wheel forward until the robot has rotated 90 degrees. 
+
+3.3.1.1 Using Rotary Encoders 
+The optical rotary encoders on each wheel of the Amigobot provide an incredibly fine yet robust way to detect the rotational position of each wheel. Each wheel's position can be loaded through SCOMP's I/O through the I/O addresses 0x80, 0x81, 0x88, and 0x89, which respectively correspond to the given address names LPOSLOW, LPOSHIGH, RPOSLOW, and RPOSHIGH. The position datum from each encoder is a 32-bit number. For I/O purposes, this datum is split into two 16-bit numbers (the upper 16 bits and the lower 16 bits), each of which corresponds to the \low" or \high" I/O address for each wheel's position.
+
+3.3.1.2 Physical Characteistics of Rotary Encoders
+The encoder datum increments by 39000 for each revolution of the wheel. The left encoder increments when the left wheel is in forward motion, while the right encoder decrements when the right wheel is in forward motion. Each wheel has a diameter of 10 cm, which results in a path of 31.42 cm being traversed for each wheel revolution so long as traction is maintained. Since there are 39000 \ticks" per revolution, one cm of linear wheel motion corresponds to 1241:41 ticks. This results in large-valued encoder data for relatively short distances. In order to simplify calculations and prevent bit carries between two 16-bit numbers (the high and low data), it is best to perform calculations on a single 16-bit number which can be produced by combining the upper eight bits of the \low" datum with the lower eight bits of the \high" datum, resulting in a reduction in encoder resolution by a factor of 256. After shifting and truncating the two 16-bit numbers into one 16-bit number, the physical characteristics of the encoder transform so that there are 152:34 ticks per wheel revolution and 4:85 ticks per cm of linear wheel motion.
+
+3.3.2 Executing a Turn
+The linear path lengths of each wheel are related by a constant such that when the dierence in path lengths of each wheel is equal to that constant, the robot is oriented precisely at an angle 90 degrees to its starting orientation. If the robot has a wheel track of R, and the linear path lengths of the right and left wheels are represented respectively by C1 and C2 (Fig. 9), then the robot has turned positive (counterclockwise) (pheta) radians when the following equation is satisfied: C1 - C2 = (pheta)R (1)
+
+For instance, if the Amigobot (R = 28 cm) is to turn about 90 degrees then continue forward, then the robot should cease turning when C1 - C2 = 0.5pi(28) =< 43.98 cm, or about 213 (0x00D5) ticks. However, during testing the team discovered that better results were produced when R was set to be 24 cm. Thus the equation would be: C1 - C2 = 0.5pi(24) =< 37.7 cm. 
+
+3.3.3 Adjustment States
+Once the lateral sensors detect that the robot is outside of the 20 +/- 1 cm range, the robot enters one of two adjustment states. 
+
+The robot feeds back the detected range difference to the left and right wheel velocities. The program uses a cumulative adjustment where each loop iteration is paused for 1 ms. 
+
+(equations here) 
+
+(explain equations.)
